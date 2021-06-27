@@ -61,4 +61,7 @@ The exported model will be saved into a *.b4tjson file which be consumed later b
 
 Later we will talk about how to use these elements to model a compute system that you are interested in exploring.
 
+## Note about Draw.io and Diagram.net Plug-ins.
+There are few fully featured plug-ins out there. For this plugin we took inspiration and code from many other places. As it stands it could easily be used as a base for other plugins as well. So, if you are thinking of creating a plugin of your own. Please take a look at the code and we hope it inspires you to create.
+
 
