@@ -8,8 +8,6 @@ This plugin works with the desktop version of draw.io/diagram.net. It hasn't bee
 Installation releases and instructions can be found here.
 [Drawio-desktop-releases](https://github.com/jgraph/drawio-desktop/releases)
 
-https://github.com/jgraph/drawio-desktop/releases
-
 ## Get the Plugin
 To get plugin (move it to your computer) you have two choices:
 1. Clone this repo.
@@ -20,7 +18,21 @@ With draw.io/diagram.net install open it.
 
 <img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
 
-![](/assets/01_Extra_Plugin.png?raw=true)
+<img src="/assets/02_No_Plugin.png?raw=true" alt="drawing" width="500"/>
+
+<img src="/assets/03_Select_B4time_js.png?raw=true" alt="drawing" width="500"/>
+
+<img src="/assets/04_Need_to_restart.png?raw=true" alt="drawing" width="500"/>
+
+<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+
+<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+
+<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+
+<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+
+
 
 
 
