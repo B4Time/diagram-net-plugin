@@ -42,7 +42,7 @@ Above, you really need to quit.  Closing won't be enough.
 
 <img src="/assets/06_Restarted.png?raw=true" alt="drawing" width="500"/>
 
-Above, restart and you should see to new features. First, on the left there should be a new pallet of B4Time components. Second, on the menu bar you should now see a B4Time menu item.
+Above, restart and you should see two new features. First, on the left there should be a new pallet of B4Time components. Second, on the menu bar you should now see a B4Time menu item.
 
 <img src="/assets/07_B4Time_Menu.png?raw=true" alt="drawing" width="500"/>
 
