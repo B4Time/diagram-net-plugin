@@ -1,0 +1,79 @@
+{
+  "GPU": {
+    "name": "GPU",
+    "type": "processor",
+    "speed": "100",
+    "links": [
+      "Ice Cream",
+      "Pudding"
+    ]
+  },
+  "Data 1": {
+    "name": "Data 1",
+    "type": "data",
+    "bound": "Memory"
+  },
+  "Ice Cream": {
+    "name": "Ice Cream",
+    "type": "link",
+    "speed": "10000"
+  },
+  "Memory": {
+    "name": "Memory",
+    "type": "memory",
+    "size": "10000",
+    "link": "Ice Cream"
+  },
+  "Task 1": {
+    "name": "Task 1",
+    "type": "task",
+    "callback": "Jump_the_shark",
+    "bound": "GPU"
+  },
+  "Task 2": {
+    "name": "Task 2",
+    "type": "task",
+    "callback": "Tall_jump",
+    "bound": "GPU"
+  },
+  "Pudding": {
+    "name": "Pudding",
+    "type": "link",
+    "speed": "10000"
+  },
+  "Processor Theta": {
+    "name": "Processor Theta",
+    "type": "processor",
+    "speed": "100",
+    "links": [
+      "Pudding",
+      "Beef"
+    ]
+  },
+  "Beef": {
+    "name": "Beef",
+    "type": "link",
+    "speed": "10000"
+  },
+  "Memory Theta": {
+    "name": "Memory Theta",
+    "type": "memory",
+    "size": "10000",
+    "link": "Beef"
+  },
+  "Data_test": {
+    "name": "Data_test",
+    "type": "data",
+    "bound": "Memory Theta"
+  },
+  "Data 2": {
+    "name": "Data 2",
+    "type": "data",
+    "bound": "Memory"
+  },
+  "Data": {
+    "name": "Data",
+    "type": "data",
+    "bound": "Memory"
+  }
+}
