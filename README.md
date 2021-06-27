@@ -52,6 +52,12 @@ Above, if you select the B4Time menu it should look something like this.
 
 Above, next you can start to layout your B4Time model using the items in the pallet.  Here is an example. The "GPU" and "Processor Theta" are of type "processor. The "Memory" and "Memory Theta" are of type "memory". The "Data*" elements are all of type "data". And, the "Task*" elements are all of type "task".
 
+The links or edges between these components are of two types "link" and "binding".  You can use the edges from the B4Time pallet or just use the edges as you normally would and the plugin will do a bunch of checking warning you of connections that won't work and probably ask you to add some labels (Ice Cream, Beef, etc).
+
+The Model Checking command can be found in the B4Time menu drop down.  The Export Model will also do model checking.
+
+The exported model will be saved into a *.b4tjson file which be consumed later by the B4Time simulator.
+
 Later we will talk about how to use these elements to model a compute system that you are interested in exploring.
 
 
