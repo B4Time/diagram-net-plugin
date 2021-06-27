@@ -18,7 +18,11 @@ With draw.io/diagram.net install open it.
 
 <img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
 
+In the image above find the Menu Extra->Plugins. 
+
 <img src="/assets/02_No_Plugin.png?raw=true" alt="drawing" width="500"/>
+
+In the image above find the Menu Extra->Plugins. 
 
 <img src="/assets/03_Select_B4time_js.png?raw=true" alt="drawing" width="500"/>
 
