@@ -24,13 +24,13 @@ With draw.io/diagram.net install open it.
 
 <img src="/assets/04_Need_to_restart.png?raw=true" alt="drawing" width="500"/>
 
-<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+<img src="/assets/05_quit.png?raw=true" alt="drawing" width="500"/>
 
-<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+<img src="/assets/06_Restarted.png?raw=true" alt="drawing" width="500"/>
 
-<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+<img src="/assets/07_B4Time_Menu.png?raw=true" alt="drawing" width="500"/>
 
-<img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
+<img src="/assets/08_With_Diagram.png?raw=true" alt="drawing" width="500"/>
 
 
 
