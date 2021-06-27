@@ -4,17 +4,18 @@ Drawio/Diagram.net Javascript Plug-in that allows the creation of B4Time models.
 ## Draw.io / Diagram.net Plugin to Draw B4Time models
 This plugin works with the desktop version of draw.io/diagram.net. It hasn't been tried on the web version and as the export uses electron specific dialog, fs and other calls it will need some rework to work on the web.
 
-## Install Draw.io/Diagram.net desktop application
+## Dependency: Install Draw.io/Diagram.net desktop application
+The B4Time Plugin will only work in the Draw.io and/or Diagram.net diagraming applications and only in the desktop versions.  
 Installation releases and instructions can be found here.
 [Drawio-desktop-releases](https://github.com/jgraph/drawio-desktop/releases)
 
-## Get the Plugin
+## Download the B4Time Plugin
 To get plugin (move it to your computer) you have two choices:
 1. Clone this repo.
 2. Save just the src/b4time.js file to somewhere on your machine.
 
-## Install the Plugin
-With draw.io/diagram.net install open it.
+## Install the B4Time Plugin
+With the draw.io/diagram.net installed, first open the draw.io/diagram.net application.
 
 <img src="/assets/01_Extra_Plugin.png?raw=true" alt="drawing" width="500"/>
 
