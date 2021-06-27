@@ -33,7 +33,3 @@ With draw.io/diagram.net install open it.
 <img src="/assets/08_With_Diagram.png?raw=true" alt="drawing" width="500"/>
 
 
-
-
-
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
