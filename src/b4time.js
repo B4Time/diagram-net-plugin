@@ -49,6 +49,7 @@ Draw.loadPlugin(function(ui) {
             obj = doc.createElement('Data');
             obj.setAttribute('label', 'Data');
             obj.setAttribute('type', 'data');
+            obj.setAttribute('current_size', '0');
             // extras=doc.createElement('Extras');
             // extras.setAttribute('type', 'data');
             // obj.appendChild(extras);
@@ -540,15 +541,15 @@ Draw.loadPlugin(function(ui) {
                 result[cell_label] = {
                     'name': cell_label,
                     'type': 'data',
-                    'bound': get_connections(cell, 'binding')[0]
+                    'bound': get_connections(cell, 'binding')[0],
+                    'current_size': cell.getAttribute('current_size', 0)
                 };
             }
             if (cell_type == 'task') {
                 result[cell_label] = {
                     'name': cell_label,
                     'type': 'task',
-                    'callback': cell.getAttribute('task_name'),
-                    'bound': get_connections(cell, 'binding')[0]
+                    'callback': cell.getAttribute('task_name')
                 };
             }
         }
