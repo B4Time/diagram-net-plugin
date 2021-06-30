@@ -549,7 +549,8 @@ Draw.loadPlugin(function(ui) {
                 result[cell_label] = {
                     'name': cell_label,
                     'type': 'task',
-                    'callback': cell.getAttribute('task_name')
+                    'callback': cell.getAttribute('task_name'),
+                    'bound': get_connections(cell, 'binding')[0]
                 };
             }
         }
