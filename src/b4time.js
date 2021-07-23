@@ -96,10 +96,7 @@ Draw.loadPlugin(function(ui) {
 	    c.firstChild.click();
 	    c.insertBefore(c.lastChild, c.firstChild);
 	    c.insertBefore(c.lastChild, c.firstChild);
-	
-	    // Adds logo to footer
-	    //ui.footerContainer.innerHTML = '<img width=50px height=17px align="right" style="margin-top:14px;margin-right:12px;" ' + 'src="http://download.esolia.net.s3.amazonaws.com/img/eSolia-Logo-Color.svg"/>';
-		
+			
 		// Adds placeholder for %today% and %filename%
 	    var graph = ui.editor.graph;
 		var graphGetGlobalVariable = graph.getGlobalVariable;
@@ -139,7 +136,8 @@ Draw.loadPlugin(function(ui) {
         mxResources.parse('checkModelAction=Check Model');
 	    mxResources.parse('runSimulationAction=Run Simulation');
 	    mxResources.parse('showLog=Show Log');
-	    mxResources.parse('exportB4TimeModel=Export Model');
+        mxResources.parse('exportB4TimeModel=Export Model');
+	    mxResources.parse('createB4TimeProject=Create Project');
 	    mxResources.parse('aboutB4Time=About B4Time');
         
 	    
@@ -160,9 +158,15 @@ Draw.loadPlugin(function(ui) {
             mxLog.show();
 	    });
 
-        // Adds action Exp1
+        // Adds action Export
 	    ui.actions.addAction('exportB4TimeModel', function() {
             saveB4TimeFileDialog(); // Calls out to platform legit file dialog
+            //create_json(graph);
+	    });
+
+        // Adds action Create Project
+	    ui.actions.addAction('createB4TimeProject', function() {
+            saveB4TimeFileDialog(true); // Calls out to platform legit file dialog
             //create_json(graph);
 	    });
 
@@ -178,6 +182,7 @@ Draw.loadPlugin(function(ui) {
             //ui.menus.addMenuItem(menu, 'runSimulationAction');
             ui.menus.addMenuItem(menu, 'showLog');
             ui.menus.addMenuItem(menu, 'exportB4TimeModel');
+            ui.menus.addMenuItem(menu, 'createB4TimeProject');
             ui.menus.addMenuItem(menu, 'aboutB4Time');
 	    });
 	
@@ -709,7 +714,7 @@ Draw.loadPlugin(function(ui) {
         return '.';
     };
 
-    function saveB4TimeFileDialog(save_callback) {
+    function saveB4TimeFileDialog(createProject=false) {
         const electron = require('electron');
         var remote = electron.remote;
         var dialog = remote.dialog;
@@ -745,8 +750,12 @@ Draw.loadPlugin(function(ui) {
             // var fs = require('fs');
             // var pluginsDir = sysPath.join(getAppDataFolder(), '/plugins');
             create_json(savepath);
-            create_task_body(savepath);
-            create_project(savepath);
+            if (createProject) {
+                // If creating a project create task body stubs
+                create_task_body(savepath);
+                // Create the project configuation file
+                create_project(savepath);
+            }
         }
         else {
             mxLog.debug(`Saving of B4Time Model Canceled`);
