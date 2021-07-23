@@ -554,7 +554,7 @@ Draw.loadPlugin(function(ui) {
                 };
             }
         }
-        return result;
+        return [result, result[cell_label]];
     }
 
     function create_json(filename) {
@@ -566,18 +566,135 @@ Draw.loadPlugin(function(ui) {
             return false;
         }
         var json_obj = {};
+        var tmp_obj = {};
         var parent = graph.getDefaultParent();
         var cells = graph.getChildCells(parent, false, false);
         var numCells = cells.length;
         for (var i = 0; i < numCells; i++) {
             var this_cell = cells[i];
-            json_obj = getJSON(this_cell, json_obj);
+            [json_obj, tmp_obj]  = getJSON(this_cell, json_obj);
         }
         var str = JSON.stringify(json_obj, null, 2); // spacing level = 2
         mxLog.debug(str);
         var fs = require('fs');
         var writer = fs.createWriteStream(filename);
         writer.write(str);
+    }
+
+    function create_project(filename) {
+        // PROJECT_TITLE: <b>B4Time New Frontier</b><br>development example
+        // PROJECT_PATH: /Users/aussie/projects/2021/simulate/b4time/b4time-sim/examples/simple_1p_2t_1m_2d
+        // TASK_DEF_IMPORTS:
+        // - '{PROJECT_PATH}/exp_task_bodies.py'
+        // DRAWING_OUTPUT_JSON: '{PROJECT_PATH}/example5.b4tjson'
+
+        var path = require('path');
+        //Return the directries:
+        var project_path = path.dirname(filename);
+        var base_filename = path.basename(filename);
+        var pyfile = base_filename.substr(0, base_filename.lastIndexOf(".")) + ".py";
+
+        var pbody = "";
+        pbody += "PROJECT_TITLE: <b>B4Time New Frontier</b><br>change this in project_conf.yml\n";
+        pbody += `PROJECT_PATH: ${project_path}\n`;
+        pbody += 'TASK_DEF_IMPORTS:\n';
+        pbody += `- '{PROJECT_PATH}/${pyfile}'\n`
+        pbody += `DRAWING_OUTPUT_JSON: '{PROJECT_PATH}/${base_filename}'`
+
+        project_file = path.join(project_path, 'project_conf.yml')
+        str = pbody;
+        mxLog.debug(str);
+        var fs = require('fs');
+        var writer = fs.createWriteStream(project_file);
+        writer.write(str);
+    }
+
+    function task_body_header() {
+        return "from b4time_helpers import *\n\n";
+    }
+
+    function task_body_function(task_name, task_callback, data_list) {
+        var tbody = "";
+        tbody += '@b4time_task_decorator\n'
+        tbody += `def ${task_callback}(task_name, sym):\n`;
+        tbody += '    # Change the code below to reflect your architecture\n';
+        tbody += '    # Read some data\n';
+        for (var i_do = 0; i_do < data_list.length; i_do++) {
+            var data_obj = data_list[i_do];
+            var data_name = data_obj.name
+            tbody += `    sym._read('${data_name}',250)\n`
+        }
+        tbody += '    # Do some processing\n';
+        tbody += '    sym._process(\'Example\', 500)\n';
+        tbody += '    # Write some data\n';
+        for (var i_do = 0; i_do < data_list.length; i_do++) {
+            var data_obj = data_list[i_do];
+            var data_name = data_obj.name
+            tbody += `    sym._write('${data_name}',500)\n`
+        }
+        tbody += '    # delay\n';
+
+        tbody += '    sym._delay(\'Delay some\', 25)\n';
+        tbody += '    # Be done\n';
+        tbody += '    sym._done()\n\n';
+
+        return tbody;
+    }
+
+    function create_task_body(filename) {
+        var graph = ui.editor.graph;
+        if (!check_diagram(graph)) {
+            // Check failed
+            mxUtils.alert(`FAILURE: Diagram check failed. JSON object not created.`);
+            return false;
+        }
+        var json_obj = {};
+        var current_obj = {};
+        var parent = graph.getDefaultParent();
+        var cells = graph.getChildCells(parent, false, false);
+        var numCells = cells.length;
+        var task_objects = [];
+        var data_objects = [];
+        for (var i = 0; i < numCells; i++) {
+            mxLog.debug("Processing Cells");
+            var this_cell = cells[i];
+            [json_obj, current_obj]  = getJSON(this_cell, json_obj);
+            mxLog.debug("Processing Cells");
+            if (current_obj != null) {
+                if (current_obj.type == 'task') {
+                    mxLog.debug("Getting Tasks");
+                    task_objects.push(current_obj)
+                }
+                else if (current_obj.type == 'data') {
+                    data_objects.push(current_obj)
+                }
+            }
+        }
+        var full_task_body = task_body_header();
+        for (var i_to = 0; i_to < task_objects.length; i_to++) {
+            var task_object = task_objects[i_to];
+            var task_name = task_object.name;
+            var task_callback = task_object.callback;
+            full_task_body += task_body_function(task_name, task_callback, data_objects);
+        }
+
+        // Check if task_bodies.py exists
+        //fs.access
+        //fs.constants
+        var file = filename.substr(0, filename.lastIndexOf(".")) + ".py";
+        // Check if the file exists in the current directory.
+        fs.access(file, fs.constants.F_OK, (err) => {
+            if (err) { // The file doesn't exist good
+                str = full_task_body;
+                mxLog.debug(str);
+                var fs = require('fs');
+                var writer = fs.createWriteStream(file);
+                writer.write(str);
+            }
+            else {
+                mxLog.debug(`${file} ${err ? 'does not exist' : 'exists'}`);
+            }
+        });
     }
 
     // From https://github.com/jgraph/drawio/blob/d76e39477bdf230ba6728dc488bd5896afb08425/src/main/webapp/js/diagramly/ElectronApp.js
@@ -628,6 +745,8 @@ Draw.loadPlugin(function(ui) {
             // var fs = require('fs');
             // var pluginsDir = sysPath.join(getAppDataFolder(), '/plugins');
             create_json(savepath);
+            create_task_body(savepath);
+            create_project(savepath);
         }
         else {
             mxLog.debug(`Saving of B4Time Model Canceled`);
@@ -676,19 +795,6 @@ Draw.loadPlugin(function(ui) {
         
         this.container = div;
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function getCellXML() {
         var enc = new mxCodec();
